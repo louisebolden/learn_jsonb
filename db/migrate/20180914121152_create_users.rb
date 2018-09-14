@@ -14,11 +14,13 @@ class CreateUsers < ActiveRecord::Migration[5.2]
         life_goals: [
           {
             priority: 1,
-            text: 'Learn jsonb'
+            text: 'Learn jsonb',
+            complete: false
           },
           {
             priority: 2,
-            text: 'More houseplants'
+            text: 'More houseplants',
+            complete: false
           }
         ]
       }
