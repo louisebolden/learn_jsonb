@@ -89,15 +89,17 @@ It offers some useful additional operators for your database queries.
 9. 📝 Add a new life goal to any user
   <details>
     <summary>Answer </summary>
+    <p>
     ```ruby
       goal_json = { "text": "Play the drums", "priority": 3, "complete": false }.to_json
       sql = "UPDATE users SET preferences = jsonb_set(preferences, '{life_goals,2}', '#{goal_json}', TRUE) WHERE id = 1;"
     ```
-  </details>
+  </p></details>
 
 10. 📝 Find a user whose life_goals include 'Learn jsonb', and update that goal to be complete
   <details>
     <summary>Answer </summary>
+    <p>
     ```ruby
       life_goal_json = { life_goals: [ { text: 'Learn jsonb' } ] }.to_json
       user = User.where('preferences @> ?', life_goal_json).first
@@ -108,4 +110,4 @@ It offers some useful additional operators for your database queries.
 
       sql = "UPDATE users SET preferences = jsonb_set(preferences, '{life_goals}', '#{updated_goal_json}', FALSE) WHERE id = #{user.id};"
     ```
-  </details>
+  </p></details>
