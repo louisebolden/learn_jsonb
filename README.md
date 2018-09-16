@@ -89,27 +89,29 @@ It offers some useful additional operators for your database queries.
     ```
 
 9. 📝 Add a new life goal to any user
-  <details>
-    <summary>Answer </summary>
-      
-    ```ruby
-    goal_json = { "text": "Play the drums", "priority": 3, "complete": false }.to_json
-    sql = "UPDATE users SET preferences = jsonb_set(preferences, '{life_goals,2}', '#{goal_json}', TRUE) WHERE id = 1;"
-    ```
-  </details>
+
+<details>
+  <summary>Answer </summary>
+
+  ```ruby
+  goal_json = { "text": "Play the drums", "priority": 3, "complete": false }.to_json
+  sql = "UPDATE users SET preferences = jsonb_set(preferences, '{life_goals,2}', '#{goal_json}', TRUE) WHERE id = 1;"
+  ```
+</details>
 
 10. 📝 Find a user whose life_goals include 'Learn jsonb', and update that goal to be complete
-  <details>
-    <summary>Answer </summary>
-      
-    ```ruby
-    life_goal_json = { life_goals: [ { text: 'Learn jsonb' } ] }.to_json
-    user = User.where('preferences @> ?', life_goal_json).first
 
-    updated_goals_json = user.life_goals.map do |goal|
-      goal['text'] == 'Learn jsonb' ? goal.tap { |goal| goal['complete'] = true } : goal
-    end.to_json
+<details>
+  <summary>Answer </summary>
 
-    sql = "UPDATE users SET preferences = jsonb_set(preferences, '{life_goals}', '#{updated_goal_json}', FALSE) WHERE id = #{user.id};"
-    ```
-  </details>
+  ```ruby
+  life_goal_json = { life_goals: [ { text: 'Learn jsonb' } ] }.to_json
+  user = User.where('preferences @> ?', life_goal_json).first
+
+  updated_goals_json = user.life_goals.map do |goal|
+    goal['text'] == 'Learn jsonb' ? goal.tap { |goal| goal['complete'] = true } : goal
+  end.to_json
+
+  sql = "UPDATE users SET preferences = jsonb_set(preferences, '{life_goals}', '#{updated_goal_json}', FALSE) WHERE id = #{user.id};"
+  ```
+</details>
