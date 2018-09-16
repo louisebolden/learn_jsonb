@@ -16,10 +16,12 @@ It offers some useful additional operators for your database queries.
   $ git clone git@github.com:louiseswift/learn_jsonb.git
   $ cd learn_jsonb
 
-  # check your Ruby and Postgres versions
+  # check your Ruby and Postgres versions and install the required versions,
+  # if they aren't already on your machine
   $ ruby -v
   $ postgres --version
 
+  $ gem install bundle # if you don't already have bundle installed
   $ bundle
   $ rake db:create && rake db:migrate
   $ rails s
@@ -41,7 +43,7 @@ It offers some useful additional operators for your database queries.
 
 3. 📝 Create a new user record in your database, with some different preferences data
 
-4. Open up `./app/models/users.rb` to see how to use `store_accessor` on a model to make its JSON attributes available as properties via dot notation, and how can help keep validations tidy
+4. Open up `./app/models/users.rb` to see how to use `store_accessor` on a model to make its JSON attributes available as properties via dot notation, and how it can help keep validations tidy
 
 5. To use these accessible properties, try the following in your console:
     ```ruby
@@ -89,17 +91,17 @@ It offers some useful additional operators for your database queries.
 9. 📝 Add a new life goal to any user
   <details>
     <summary>Answer </summary>
-    <p>
+      
     ```ruby
       goal_json = { "text": "Play the drums", "priority": 3, "complete": false }.to_json
       sql = "UPDATE users SET preferences = jsonb_set(preferences, '{life_goals,2}', '#{goal_json}', TRUE) WHERE id = 1;"
     ```
-  </p></details>
+  </details>
 
 10. 📝 Find a user whose life_goals include 'Learn jsonb', and update that goal to be complete
   <details>
     <summary>Answer </summary>
-    <p>
+      
     ```ruby
       life_goal_json = { life_goals: [ { text: 'Learn jsonb' } ] }.to_json
       user = User.where('preferences @> ?', life_goal_json).first
@@ -110,4 +112,4 @@ It offers some useful additional operators for your database queries.
 
       sql = "UPDATE users SET preferences = jsonb_set(preferences, '{life_goals}', '#{updated_goal_json}', FALSE) WHERE id = #{user.id};"
     ```
-  </p></details>
+  </details>
