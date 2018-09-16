@@ -65,7 +65,7 @@ It offers some useful additional operators for your database queries.
     ```sql
       jsonb_set(target jsonb, path text[], new_value jsonb, [create_missing boolean])
     ```
-    We could use this to change 'doggo' to 'catto' in our first user's languages array:
+    We could use this to change our first user's email opt-in setting:
     ```ruby
       p = ActiveRecord::Base.establish_connection
       c = p.connection
