@@ -43,7 +43,7 @@ It offers some useful additional operators for your database queries.
 
 3. 📝 Create a new user record in your database, with some different preferences data
 
-4. Open up `./app/models/users.rb` to see how to use `store_accessor` on a model to make its JSON attributes available as properties via dot notation, and how it can help keep validations tidy
+4. Open up `./app/models/user.rb` to see how to use `store_accessor` on a model to make its JSON attributes available as properties via dot notation, and how it can help keep validations tidy
 
 5. To use these accessible properties, try the following in your console:
     ```ruby
